@@ -18,6 +18,7 @@ const initialState = {
 export const getUserName = state => state.auth.user.name;
 export const getLogging = state => state.auth.isLogged;
 export const getToken = state => state.auth.token;
+export const selectIsRefreshing = state => state.auth.isRefreshing;
 
 // ================== ASYNC OPERATIONS
 export const registerUser = createAsyncThunk(

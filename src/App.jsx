@@ -1,10 +1,12 @@
 import 'modern-normalize';
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { PublicRoute } from "hocs/PublicRoute";
 import { PrivateRoute } from "hocs/PrivateRoute";
 import { Loader } from 'components/common/Loader/Loader';
-
+import { refreshUser } from 'redux/operations';
+import { useAuth } from 'hooks/useAuth';
+import { useDispatch } from 'react-redux';
 const AppBar = lazy(() => import('layouts/AppBar'))
 const Contacts = lazy(() => import('pages/Contacts/Contacts'));
 const Home = lazy(() => import('pages/Home'));
@@ -12,7 +14,16 @@ const Login = lazy(() => import('pages/Login/Login'));
 const Register = lazy(() => import('pages/Register/Register'));
 
 export const App = () => {
-  return (
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<AppBar />}>

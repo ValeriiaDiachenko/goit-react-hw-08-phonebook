@@ -5,7 +5,7 @@ import { PublicRoute } from "hocs/PublicRoute";
 import { PrivateRoute } from "hocs/PrivateRoute";
 import { Loader } from 'components/common/Loader/Loader';
 import { refreshUser } from 'redux/operations';
-import { useAuth } from 'hooks/useAuth';
+import { useAuth } from 'redux/useAuth';
 import { useDispatch } from 'react-redux';
 const AppBar = lazy(() => import('layouts/AppBar'))
 const Contacts = lazy(() => import('pages/Contacts/Contacts'));
